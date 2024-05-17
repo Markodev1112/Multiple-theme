@@ -444,13 +444,15 @@
                       {% assign current_id = product.id %}
                       <div class="recommend-product__list">
                         {% if collection %}
-                          <div class="product">
+                          <div class="collection product" data-product ="{{ current_term }}">
                             <span class="title">                                                         
                               {{ block.settings.recommend_product }}-{% if current_term != blank %} {{ current_term }} {% endif %}
                             </span>
                             <div class="product-item">
+                              {% assign index = 0 %}
                               {% for product in collection.products %}
                                 {% if product.metafields.my_fields.stensort == current_term %}
+                                  {% assign index = index | plus: 1 %}
                                   <div class="item">
                                     <a href="{{ product.url }}" class="{% if product.id == current_id %} active {% endif %}">
                                       <img class="item-image" src="{{ product.featured_image | img_url: medium }}" alt="region-image">
@@ -460,17 +462,22 @@
                                     </div>
                                     <div class="tool-tip-pointer"></div>
                                   </div>
+                                  {% if index == 10 %}
+                                    {% break %}
+                                  {% endif %}
                                 {% endif %}
                               {% endfor %}
                             </div>
                           </div>
-                          <div class="color">
+                          <div class="collection color" data-color ="{{ current_color }}">
                             <span class="title">                                                         
                               {{ block.settings.recommend_color }}-{% if current_color != blank %} {{ current_color }} {% endif %}
                             </span>
                             <div class="product-item">
+                              {% assign index = 0 %}
                               {% for product in collection.products %}
                                 {% if product.metafields.my_fields.farg == current_color %}
+                                  {% assign index = index | plus: 1 %}
                                   <div class="item">  
                                     <a href="{{ product.url }}" class="{% if product.id == current_id %} active {% endif %}">
                                       <img class="item-image" src="{{ product.featured_image | img_url: medium }}" alt="region-image">
@@ -480,17 +487,22 @@
                                     </div>
                                     <div class="tool-tip-pointer"></div>
                                   </div>
+                                  {% if index == 10 %}
+                                    {% break %}
+                                  {% endif %}
                                 {% endif %}
                               {% endfor %}
                             </div>
                           </div>
-                          <div class="size">
+                          <div class="collection size" data-size="{{ current_size }}">
                             <span class="title">                                                         
                               {{ block.settings.recommend_size }}
                             </span>
                             <div class="product-item">
+                              {% assign index = 0 %}
                               {% for product in collection.products %}
                                 {% if product.metafields.custom.height == current_size %}
+                                  {% assign index = index | plus: 1 %}
                                   <div class="item">
                                     <a href="{{ product.url }}" class="{% if product.id == current_id %} active {% endif %}">
                                       <img class="item-image" src="{{ product.metafields.custom.size_image | img_url: medium }}" alt="region-image">
@@ -501,6 +513,9 @@
                                     </div>
                                     <div class="tool-tip-pointer"></div>
                                   </div>
+                                  {% if index == 6 %}
+                                    {% break %}
+                                  {% endif %}
                                 {% endif %}
                               {% endfor %}
                             </div>
@@ -513,8 +528,10 @@
                                   {{ block.settings.recommend_product }}-{% if current_term != blank %} {{ current_term }} {% endif %}
                                 </span>
                                 <div class="product-item">
+                                  {% assign index = 0 %}
                                   {% for product in collection.products %}
                                     {% if product.metafields.my_fields.stensort == current_term %}
+                                      {% assign index = index | plus: 1 %}
                                       <div class="item">
                                         <a href="{{ product.url }}" class="{% if product.id == current_id %} active {% endif %}">
                                           <img class="item-image" src="{{ product.featured_image | img_url: medium }}" alt="region-image">
@@ -524,6 +541,9 @@
                                         </div>
                                         <div class="tool-tip-pointer"></div>
                                       </div>
+                                      {% if index == 10 %}
+                                        {% break %}
+                                      {% endif %}
                                     {% endif %}
                                   {% endfor %}
                                 </div>
@@ -533,8 +553,10 @@
                                   {{ block.settings.recommend_color }}-{% if current_color != blank %} {{ current_color }} {% endif %}
                                 </span>
                                 <div class="product-item">
+                                  {% assign index = 0 %}
                                   {% for product in collection.products %}
                                     {% if product.metafields.my_fields.farg == current_color %}
+                                      {% assign index = index | plus: 1 %}
                                       <div class="item">
                                         <a href="{{ product.url }}" class="{% if product.id == current_id %} active {% endif %}">
                                           <img class="item-image" src="{{ product.featured_image | img_url: medium }}" alt="region-image">
@@ -544,6 +566,9 @@
                                         </div>
                                         <div class="tool-tip-pointer"></div>
                                       </div>
+                                      {% if index == 10 %}
+                                        {% break %}
+                                      {% endif %}
                                     {% endif %}
                                   {% endfor %}
                                 </div>
@@ -553,18 +578,23 @@
                                   {{ block.settings.recommend_size }}
                                 </span>
                                 <div class="product-item">
+                                  {% assign index = 0 %}
                                   {% for product in collection.products %}
                                     {% if product.metafields.custom.height == current_size %}
+                                      {% assign index = index | plus: 1 %}
                                       <div class="item">  
                                         <a href="{{ product.url }}" class="{% if product.id == current_id %} active {% endif %}">
                                           <img class="item-image" src="{{ product.metafields.custom.size_image | img_url: medium }}" alt="region-image">
                                           <span>{{ product.metafields.my_fields.storlek }}</span>
                                         </a>
                                         <div class="tool-tip">
-                                          <span class="tool-tip-text">{{ product.my_fields.storlek }}</span>
+                                          <span class="tool-tip-text">{{ product.metafields.my_fields.storlek }}</span>
                                         </div>
                                         <div class="tool-tip-pointer"></div>
                                       </div>
+                                      {% if index == 6 %}
+                                        {% break %}
+                                      {% endif %}
                                     {% endif %}
                                   {% endfor %}
                                 </div>
